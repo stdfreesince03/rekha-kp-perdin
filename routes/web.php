@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HRTripController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -89,6 +90,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
             $trip->reject(auth()->id(), $request->rejection_reason);
             return redirect()->route('hr.pending-trips')->with('success', 'Trip rejected.');
         })->name('hr.trips.reject');
+
+        // routes/web.php
+        Route::get('/hr/trips-history', [HRTripController::class, 'history'])->name('hr.trips-history');
 
         Route::get('/cities', function () {
             return view('cities.index');
