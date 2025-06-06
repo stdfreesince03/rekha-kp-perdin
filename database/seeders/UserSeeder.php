@@ -9,35 +9,42 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        User::updateOrCreate([
-            'name' => 'Employee Demo',
-            'email' => 'pegawai@akhdani.com',
-            'password' => Hash::make('password'),
-            'role' => 'PEGAWAI',
-            'employee_id' => 'EMP001',
-            'department' => 'IT',
-            'is_active' => true,
-        ]);
+        User::updateOrCreate(
+            ['email' => 'pegawai@akhdani.com'],
+            [
+                'name' => 'Employee Demo',
+                'password' => Hash::make('password'),
+                'role' => 'PEGAWAI',
+                'employee_id' => 'EMP001',
+                'department' => 'IT',
+                'is_active' => true,
+            ]
+        );
 
-        User::updateOrCreate([
-            'name' => 'HR Manager',
-            'email' => 'sdm@akhdani.com',
-            'password' => Hash::make('password'),
-            'role' => 'SDM',
-            'employee_id' => 'HR001',
-            'department' => 'HR',
-            'is_active' => true,
-        ]);
+        User::updateOrCreate(
+            ['email' => 'sdm@akhdani.com'],
+            [
+                'name' => 'HR Manager',
+                'password' => Hash::make('password'),
+                'role' => 'SDM',
+                'employee_id' => 'HR001',
+                'department' => 'HR',
+                'is_active' => true,
+            ]
+        );
 
-        User::updateOrCreate([
-            'name' => 'John Doe',
-            'email' => 'john@akhdani.com',
-            'password' => Hash::make('password'),
-            'role' => 'PEGAWAI',
-            'employee_id' => 'EMP002',
-            'department' => 'Marketing',
-            'is_active' => true,
-        ]);
+        User::updateOrCreate(
+            ['email' => 'john@akhdani.com'],
+            [
+                'name' => 'John Doe',
+                'password' => Hash::make('password'),
+                'role' => 'PEGAWAI',
+                'employee_id' => 'EMP002',
+                'department' => 'Marketing',
+                'is_active' => true,
+            ]
+        );
+
         User::updateOrCreate(
             ['email' => 'admin@akhdani.com'],
             [
