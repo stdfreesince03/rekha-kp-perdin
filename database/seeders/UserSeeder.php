@@ -38,5 +38,16 @@ class UserSeeder extends Seeder
             'department' => 'Marketing',
             'is_active' => true,
         ]);
+        User::create(
+            ['email' => 'admin@akhdani.com'],
+            [
+                'name' => 'Admin',
+                'password' => Hash::make('password'),
+                'role' => 'ADMIN',
+                'employee_id' => 'ADM001',
+                'department' => 'Administration',
+                'is_active' => true,
+            ]
+        );
     }
 }

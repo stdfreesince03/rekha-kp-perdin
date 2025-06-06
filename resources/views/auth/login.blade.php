@@ -91,6 +91,7 @@
             <div class="text-xs text-gray-600 space-y-1">
                 <div><strong>Employee:</strong> pegawai@akhdani.com / password</div>
                 <div><strong>HR:</strong> sdm@akhdani.com / password</div>
+                <div><strong>Admin:</strong>admin@akhdani.com / password</div>
             </div>
         </div>
     </div>

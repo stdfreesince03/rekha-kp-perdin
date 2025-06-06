@@ -41,6 +41,10 @@ class User extends Authenticatable
         return $this->role === 'SDM';
     }
 
+    public function isAdmin(){
+        return $this->role==='ADMIN';
+    }
+
 
     public function scopeActive($query)
     {

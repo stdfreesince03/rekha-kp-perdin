@@ -11,6 +11,49 @@ Route::get('/', function () {
 
 // Dashboard routes (after login)
 Route::middleware(['auth', 'verified'])->group(function () {
+    Route::middleware(['auth', 'verified', 'role:ADMIN'])->group(function () {
+        Route::get('/admin/dashboard', function () {
+            $users = \App\Models\User::all();
+            return view('admin.dashboard', compact('users'));
+        })->name('admin.dashboard');
+
+        Route::post('/admin/users', function (\Illuminate\Http\Request $request) {
+            $validated = $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|string|min:6',
+                'role' => 'required|in:PEGAWAI,SDM,ADMIN',
+                'department' => 'nullable|string|max:255',
+            ]);
+
+            \App\Models\User::create([
+                'name' => $validated['name'],
+                'email' => $validated['email'],
+                'password' => bcrypt($validated['password']),
+                'role' => $validated['role'],
+                'department' => $validated['department'],
+                'is_active' => true,
+            ]);
+
+            return redirect()->route('admin.dashboard')->with('success', 'User created!');
+        })->name('admin.users.store');
+
+        Route::patch('/admin/users/{user}/role', function (\App\Models\User $user, \Illuminate\Http\Request $request) {
+            $request->validate([
+                'role' => 'required|in:PEGAWAI,SDM,ADMIN',
+            ]);
+
+            $user->update(['role' => $request->role]);
+
+            return redirect()->route('admin.dashboard')->with('success', 'User role updated!');
+        })->name('admin.users.updateRole');
+
+        Route::delete('/admin/users/{user}', function (\App\Models\User $user) {
+            $user->delete();
+            return redirect()->route('admin.dashboard')->with('success', 'User deleted!');
+        })->name('admin.users.destroy');
+
+    });
 
     // Employee Dashboard
     Route::middleware(['role:PEGAWAI'])->group(function () {
@@ -94,9 +137,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // routes/web.php
         Route::get('/hr/trips-history', [HRTripController::class, 'history'])->name('hr.trips-history');
 
-        Route::get('/cities', function () {
-            return view('cities.index');
-        })->name('cities.index');
+        Route::get('/cities', [\App\Http\Controllers\CityController::class, 'index'])->name('cities.index');
+        Route::post('/cities', [\App\Http\Controllers\CityController::class, 'store'])->name('cities.store');
+        Route::delete('/cities/{city}', [\App\Http\Controllers\CityController::class, 'destroy'])->name('cities.destroy');
+        Route::get('/cities/{city}/edit', [\App\Http\Controllers\CityController::class, 'edit'])->name('cities.edit');
+        Route::patch('/cities/{city}', [\App\Http\Controllers\CityController::class, 'update'])->name('cities.update');
 
         Route::get('/users', function () {
             return view('users.index');
