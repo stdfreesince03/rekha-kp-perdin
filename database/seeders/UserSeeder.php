@@ -9,7 +9,7 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        User::create([
+        User::updateOrCreate([
             'name' => 'Employee Demo',
             'email' => 'pegawai@akhdani.com',
             'password' => Hash::make('password'),
@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
             'is_active' => true,
         ]);
 
-        User::create([
+        User::updateOrCreate([
             'name' => 'HR Manager',
             'email' => 'sdm@akhdani.com',
             'password' => Hash::make('password'),
@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
             'is_active' => true,
         ]);
 
-        User::create([
+        User::updateOrCreate([
             'name' => 'John Doe',
             'email' => 'john@akhdani.com',
             'password' => Hash::make('password'),
@@ -38,7 +38,7 @@ class UserSeeder extends Seeder
             'department' => 'Marketing',
             'is_active' => true,
         ]);
-        User::create(
+        User::updateOrCreate(
             ['email' => 'admin@akhdani.com'],
             [
                 'name' => 'Admin',
