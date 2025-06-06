@@ -229,12 +229,12 @@ class BusinessTrip extends Model
     public function getStatusBadgeAttribute()
     {
         $badges = [
-            'PENDING' => '<span class="badge bg-warning">Pending</span>',
-            'APPROVED' => '<span class="badge bg-success">Approved</span>',
-            'REJECTED' => '<span class="badge bg-danger">Rejected</span>',
+            'PENDING' => '<span class="px-3 py-1 text-xs font-semibold text-orange-600 bg-orange-100 rounded-full">Pending</span>',
+            'APPROVED' => '<span class="px-3 py-1 text-xs font-semibold text-blue-600 bg-blue-100 rounded-full">Approved</span>',
+            'REJECTED' => '<span class="px-3 py-1 text-xs font-semibold text-red-600 bg-red-100 rounded-full">Rejected</span>',
         ];
 
-        return $badges[$this->status] ?? '<span class="badge bg-secondary">Unknown</span>';
+        return $badges[$this->status] ?? '<span class="px-3 py-1 text-xs font-semibold text-gray-600 bg-gray-100 rounded-full">Unknown</span>';
     }
 
     public function getFormattedAllowanceAttribute()

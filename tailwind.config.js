@@ -4,18 +4,26 @@ import forms from '@tailwindcss/forms';
 /** @type {import('tailwindcss').Config} */
 export default {
     content: [
-        './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
-        './storage/framework/views/*.php',
-        './resources/views/**/*.blade.php',
+        "./resources/**/*.blade.php",
+        "./resources/**/*.js",
+        "./resources/**/*.vue",
     ],
-
     theme: {
         extend: {
+            colors: {
+                'akhdani': {
+                    'primary': '#3B82F6',
+                    'secondary': '#64748B',
+                    'orange': '#F97316',
+                    'light': '#F8FAFC',
+                }
+            },
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Figtree', 'ui-sans-serif', 'system-ui'],
             },
         },
     },
-
-    plugins: [forms],
-};
+    plugins: [
+        require('@tailwindcss/forms'),
+    ],
+}

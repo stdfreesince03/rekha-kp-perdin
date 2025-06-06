@@ -8,4 +8,12 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    define: {
+        global: 'globalThis',
+    },
+    resolve: {
+        alias: {
+            '@': '/resources/js',
+        },
+    },
 });
